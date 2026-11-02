@@ -9,6 +9,13 @@
 
 尚未包含：攻击者、泄露指标、防御策略。
 
+## 架构
+
+![执行流程](docs/figures/architecture.png)
+
+实线是已实现的部分（P1–P2），虚线是尚未实现的（P3 攻击者 / P5 防御）。
+图由 `docs/figures/architecture.py` 生成，改布局改脚本重跑即可，不要手改 PNG。
+
 ## 环境要求
 
 - Windows 10/11 + PowerShell 5.1（实测：Windows 11 26200）

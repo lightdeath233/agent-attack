@@ -37,6 +37,10 @@
 
 ### 1.2 代码地图（扩展点在哪）
 
+![执行流程](figures/architecture.png)
+
+图源：`docs/figures/architecture.py`（改布局改脚本重跑，不要手改 PNG）。
+
 | 模块 | 现在负责 | 将来挂什么 |
 | --- | --- | --- |
 | `config.py` | YAML + `.env`、校验、脱敏 | P3 加 `eval:`、P5 加 `defense:` 段 |
