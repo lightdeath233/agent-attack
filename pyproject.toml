@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "privacy-agent"
+version = "0.1.0"
+description = "面向多轮交互的 LLM 智能体隐私泄露评估实验平台"
+requires-python = ">=3.11"
+dependencies = [
+    "openai>=3.42,<4",
+    "python-dotenv>=1.0,<2",
+    "pydantic>=2.9,<3",
+    "PyYAML>=6.0,<7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

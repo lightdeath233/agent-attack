@@ -1,0 +1,18 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+
+# pip / pytest 在本机把临时目录建在了仓库根目录
+pip-*/
+pytest-of-*/
+
+# 密钥与实验产物
+.env
+runs/
+
+.DS_Store

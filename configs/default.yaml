@@ -1,0 +1,18 @@
+# 第一阶段默认实验配置
+#
+# 关于 thinking：DeepSeek 平台默认开启思考模式，且思考模式下 temperature 无效、
+# 输出 token 大幅增加。第一阶段以“行为可比、成本可控”为目标，显式关闭。
+# 将来若要把思考模式当作影响因素，复制一份 configs/thinking.yaml 单独跑。
+llm:
+  provider: deepseek
+  base_url: https://api.deepseek.com
+  model: deepseek-flash      # deepseek-flash | deepseek-v4-pro
+  thinking: disabled         # disabled | enabled
+  temperature: 0.0           # 仅非思考模式生效
+  max_tokens: 1024
+  timeout_s: 60
+  max_retries: 3             # 仅对 429/5xx/超时重试；401 立即失败
+
+run:
+  out_dir: runs
+  repeat: 1
