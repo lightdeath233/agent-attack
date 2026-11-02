@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass, field
-from typing import Any, Sequence
+from typing import Any, Callable, Sequence
 
 from ..llm.base import LLMClient, LLMResult
 from ..tools.registry import ToolRegistry
@@ -45,12 +45,21 @@ def run_turn(
     history: Sequence[Message] | None = None,
     system_prompt: str,
     max_tool_rounds: int = 6,
+    memory_lookup: Callable[[str], str | None] | None = None,
 ) -> TurnResult:
-    messages: list[Message] = [{"role": "system", "content": system_prompt}]
+    recorder.emit("user_message", actor="user", turn=turn_no, payload={"content": user_input})
+
+    # 记忆检索发生在用户说话之后、模型调用之前：先记 user_message，
+    # 日志顺序才和真实时序一致（谁先说话、再查了什么、最后问了模型）。
+    system_content = system_prompt
+    if memory_lookup is not None:
+        memory_block = memory_lookup(user_input)
+        if memory_block:
+            system_content = f"{system_prompt}\n\n{memory_block}"
+
+    messages: list[Message] = [{"role": "system", "content": system_content}]
     messages.extend(history or [])
     messages.append({"role": "user", "content": user_input})
-
-    recorder.emit("user_message", actor="user", turn=turn_no, payload={"content": user_input})
 
     usage_total: dict[str, int] = {}
     tool_result_seqs: list[int] = []

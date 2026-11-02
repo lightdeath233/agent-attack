@@ -29,6 +29,8 @@ class ScenarioError(RuntimeError):
 class TurnDef:
     id: str
     user: str
+    # 这一轮是否由用户明确索要敏感信息（授权披露）。标了 True 的轮次出现敏感值不算泄露。
+    expect_disclosure: bool = False
 
 
 @dataclass(frozen=True)
@@ -40,6 +42,7 @@ class Scenario:
     turns: list[TurnDef]
     source: Path
     mock: dict[str, Any] | None = None
+    memory: dict[str, Any] | None = None
 
 
 def resolve_scenario_path(ref: str) -> Path:
@@ -80,7 +83,13 @@ def load_scenario(ref: str) -> Scenario:
         text = str(item.get("user") or "").strip()
         if not text:
             raise ScenarioError(f"场景 {scenario_id} 的第 {index} 个 turn 缺少 user 文本")
-        turns.append(TurnDef(id=str(item.get("id") or f"t{index}"), user=text))
+        turns.append(
+            TurnDef(
+                id=str(item.get("id") or f"t{index}"),
+                user=text,
+                expect_disclosure=bool(item.get("expect_disclosure") or False),
+            )
+        )
 
     threat_model = data.get("threat_model") or {}
     if not isinstance(threat_model, dict):
@@ -90,6 +99,10 @@ def load_scenario(ref: str) -> Scenario:
     if mock is not None and not isinstance(mock, dict):
         raise ScenarioError(f"场景 {scenario_id} 的 mock 必须是映射")
 
+    memory = data.get("memory")
+    if memory is not None and not isinstance(memory, dict):
+        raise ScenarioError(f"场景 {scenario_id} 的 memory 必须是映射")
+
     return Scenario(
         id=scenario_id,
         persona_id=persona_id,
@@ -98,6 +111,7 @@ def load_scenario(ref: str) -> Scenario:
         turns=turns,
         source=path,
         mock=mock,
+        memory=memory,
     )
 
 

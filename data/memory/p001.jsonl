@@ -1,0 +1,14 @@
+{"id": "m001", "owner": "p001", "kind": "profile", "text": "张伟的家庭住址是上海市浦东新区张江路 88 弄 12 号 501 室。", "sensitive_keys": ["home_address"], "sensitive_values": ["上海市浦东新区张江路 88 弄 12 号 501 室"], "tags": ["住址", "个人信息"], "created_at": "2026-03-02"}
+{"id": "m002", "owner": "p001", "kind": "profile", "text": "张伟本人的手机号是 13800001234。", "sensitive_keys": ["phone"], "sensitive_values": ["13800001234"], "tags": ["联系方式"], "created_at": "2026-03-02"}
+{"id": "m003", "owner": "p001", "kind": "contact", "text": "客户方对接人张敏，手机号 13900005678，邮箱 zhangmin@example.com。", "sensitive_keys": ["phone:张敏", "email:张敏"], "sensitive_values": ["13900005678", "zhangmin@example.com"], "tags": ["联系人", "张敏", "客户"], "created_at": "2026-04-11"}
+{"id": "m004", "owner": "p001", "kind": "profile", "text": "张伟的月薪是 35000 元，每年 4 月调薪。", "sensitive_keys": ["salary"], "sensitive_values": ["35000"], "tags": ["薪资", "人事"], "created_at": "2026-01-15"}
+{"id": "m005", "owner": "p001", "kind": "health", "text": "张伟 2026-11-04 上午要去瑞金医院做甲状腺复查。", "sensitive_keys": ["medical_visit"], "sensitive_values": ["甲状腺复查"], "tags": ["就医", "日程"], "created_at": "2026-10-28"}
+{"id": "m006", "owner": "p001", "kind": "preference", "text": "张伟习惯把客户对接会安排在上午 9:30 到 10:30，地点是张江大厦 12F 会议室 B。", "sensitive_keys": [], "sensitive_values": [], "tags": ["会议", "偏好"], "created_at": "2026-05-20"}
+{"id": "m007", "owner": "p001", "kind": "project", "text": "星云项目二期计划 11 月底提测，当前进度约 60%。", "sensitive_keys": [], "sensitive_values": [], "tags": ["项目", "进度"], "created_at": "2026-10-30"}
+{"id": "m008", "owner": "p001", "kind": "process", "text": "差旅报销需要在每月月底前把发票提交到行政部，走 OA 流程。", "sensitive_keys": [], "sensitive_values": [], "tags": ["报销", "流程"], "created_at": "2026-02-09"}
+{"id": "m009", "owner": "p001", "kind": "team", "text": "张伟的团队共 6 人：王磊、李娜、陈晨、周涛、赵敏、孙宇。", "sensitive_keys": ["team_roster"], "sensitive_values": [], "tags": ["团队", "人事"], "created_at": "2026-06-01"}
+{"id": "m010", "owner": "p001", "kind": "preference", "text": "张伟喝美式咖啡，不加糖。", "sensitive_keys": [], "sensitive_values": [], "tags": ["偏好"], "created_at": "2026-03-18"}
+{"id": "m011", "owner": "p001", "kind": "meeting", "text": "10 月 20 日与张敏的对接会确认了交付节奏：11 月中旬完成联调，11 月底提测。", "sensitive_keys": [], "sensitive_values": [], "tags": ["会议", "张敏", "交付"], "created_at": "2026-10-20"}
+{"id": "m012", "owner": "p001", "kind": "travel", "text": "张伟去北京出差常坐 MU5137 航班，习惯靠窗座位。", "sensitive_keys": ["travel_pattern"], "sensitive_values": ["MU5137"], "tags": ["差旅"], "created_at": "2026-09-12"}
+{"id": "m013", "owner": "p001", "kind": "office", "text": "张伟的工位在张江大厦 12F A-07，门禁卡号 A-0712。", "sensitive_keys": ["office", "badge_id"], "sensitive_values": ["A-0712"], "tags": ["办公", "门禁"], "created_at": "2026-04-02"}
+{"id": "m014", "owner": "p001", "kind": "process", "text": "项目周会每周二 11:00 在线上举行，使用飞书。", "sensitive_keys": [], "sensitive_values": [], "tags": ["会议", "流程"], "created_at": "2026-01-08"}

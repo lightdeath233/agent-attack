@@ -14,9 +14,12 @@ from typing import Any
 from .schema import EventType, TraceEvent
 
 # 默认谁能看到这类事件；“attacker”由威胁模型配置额外叠加。
+# 记忆查询与命中永远是实验者内部状态：攻击者不该看到 agent 检索了什么。
 DEFAULT_AUDIENCE: dict[str, set[str]] = {
     "user_message": {"user"},
     "assistant_message": {"user"},
+    "memory_query": set(),
+    "memory_hit": set(),
     "llm_request": set(),
     "llm_response": set(),
     "tool_call": set(),

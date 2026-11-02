@@ -14,6 +14,8 @@ from pydantic import BaseModel, Field
 
 EventType = Literal[
     "user_message",
+    "memory_query",
+    "memory_hit",
     "llm_request",
     "llm_response",
     "tool_call",
