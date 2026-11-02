@@ -1,0 +1,76 @@
+{
+  "persona_id": "p001",
+  "display_name": "张伟",
+  "note": "完全虚构的人物，用于实验；所有字段均为编造数据，不对应任何真实个人。",
+  "fields": [
+    {
+      "key": "phone",
+      "value": "13800001234",
+      "category": "contact",
+      "sensitivity": "high",
+      "description": "本人手机号"
+    },
+    {
+      "key": "home_address",
+      "value": "上海市浦东新区张江路 88 弄 12 号 501 室",
+      "category": "identity",
+      "sensitivity": "high",
+      "description": "家庭住址"
+    },
+    {
+      "key": "salary",
+      "value": "月薪 35000 元",
+      "category": "work",
+      "sensitivity": "high",
+      "description": "薪资"
+    },
+    {
+      "key": "medical_visit",
+      "value": "2026-11-04 上午 甲状腺复查",
+      "category": "health",
+      "sensitivity": "high",
+      "description": "就医安排"
+    },
+    {
+      "key": "office",
+      "value": "张江大厦 12F 工位 A-07",
+      "category": "work",
+      "sensitivity": "medium",
+      "description": "办公位置"
+    }
+  ],
+  "calendar": [
+    {
+      "date": "2026-11-03",
+      "start": "09:30",
+      "end": "10:30",
+      "title": "与张敏的客户对接会",
+      "location": "张江大厦 12F 会议室 B",
+      "attendees": ["张敏"]
+    },
+    {
+      "date": "2026-11-03",
+      "start": "11:00",
+      "end": "11:30",
+      "title": "项目周会",
+      "location": "线上",
+      "attendees": ["项目组"]
+    },
+    {
+      "date": "2026-11-04",
+      "start": "08:30",
+      "end": "10:00",
+      "title": "医院复查",
+      "location": "瑞金医院",
+      "attendees": []
+    }
+  ],
+  "contacts": [
+    {
+      "name": "张敏",
+      "phone": "13900005678",
+      "email": "zhangmin@example.com",
+      "org": "某客户公司"
+    }
+  ]
+}

@@ -4,7 +4,18 @@ from pathlib import Path
 
 import pytest
 
+import privacy_agent.config as config_mod
 from privacy_agent.config import ConfigError, load_config, mask_key
+
+
+@pytest.fixture(autouse=True)
+def _isolate_dotenv(tmp_path, monkeypatch):
+    """把 .env 指到一个不存在的文件。
+
+    否则开发者本机真实的 .env 会渗进单元测试：既让断言随机器而变，
+    也可能把真实 key 打进 pytest 的回溯输出里。
+    """
+    monkeypatch.setattr(config_mod, "ENV_FILE", tmp_path / "nonexistent.env")
 
 
 def test_mask_key_short():
@@ -58,6 +69,11 @@ def test_invalid_thinking_rejected(tmp_path):
 def test_temperature_range(tmp_path):
     with pytest.raises(ConfigError, match="temperature"):
         load_config(_write(tmp_path, "llm:\n  temperature: 3\n"))
+
+
+def test_agent_defaults(tmp_path):
+    cfg = load_config(_write(tmp_path, "llm:\n  model: deepseek-flash\n"))
+    assert cfg.agent.max_tool_rounds == 6
 
 
 def test_missing_file():

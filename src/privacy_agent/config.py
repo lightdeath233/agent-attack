@@ -54,9 +54,15 @@ class RunConfig:
 
 
 @dataclass(frozen=True)
+class AgentConfig:
+    max_tool_rounds: int
+
+
+@dataclass(frozen=True)
 class AppConfig:
     llm: LLMConfig
     run: RunConfig
+    agent: AgentConfig
     source: Path
 
 
@@ -112,10 +118,13 @@ def load_config(path: Path | str | None = None) -> AppConfig:
 
     raw_llm = data.get("llm") or {}
     raw_run = data.get("run") or {}
+    raw_agent = data.get("agent") or {}
     if not isinstance(raw_llm, dict):
         raise ConfigError("配置项 llm 必须是键值映射")
     if not isinstance(raw_run, dict):
         raise ConfigError("配置项 run 必须是键值映射")
+    if not isinstance(raw_agent, dict):
+        raise ConfigError("配置项 agent 必须是键值映射")
 
     model = str(os.environ.get("DEEPSEEK_MODEL") or raw_llm.get("model") or "deepseek-flash")
     if model not in ALLOWED_MODELS:
@@ -152,6 +161,10 @@ def load_config(path: Path | str | None = None) -> AppConfig:
     if not out_dir.is_absolute():
         out_dir = (cfg_path.parent.parent / out_dir).resolve()
 
+    max_tool_rounds = _as_number(raw_agent.get("max_tool_rounds", 6), "agent.max_tool_rounds", integer=True)
+    if not 1 <= max_tool_rounds <= 20:
+        raise ConfigError(f"agent.max_tool_rounds 必须在 [1, 20] 之间，当前为 {max_tool_rounds}")
+
     env_key = os.environ.get(API_KEY_VAR)
     file_key = _key_from_env_file()
     if env_key:
@@ -176,6 +189,7 @@ def load_config(path: Path | str | None = None) -> AppConfig:
             api_key_source=source,
         ),
         run=RunConfig(out_dir=out_dir, repeat=repeat),
+        agent=AgentConfig(max_tool_rounds=max_tool_rounds),
         source=cfg_path,
     )
 

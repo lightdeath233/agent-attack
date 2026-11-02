@@ -16,3 +16,7 @@ llm:
 run:
   out_dir: runs
   repeat: 1
+
+agent:
+  # 单轮内最多允许几次“模型→工具→模型”的往返；超过则记 error 事件并终止该轮
+  max_tool_rounds: 6

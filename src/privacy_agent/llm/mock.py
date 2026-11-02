@@ -19,6 +19,7 @@ class MockLLM:
         self.tool_name = tool_name
         self.tool_arguments = tool_arguments
         self.calls: list[dict[str, Any]] = []
+        self._tool_emitted = False
 
     def __repr__(self) -> str:
         return "MockLLM()"
@@ -41,8 +42,10 @@ class MockLLM:
                 break
 
         tool_calls = []
-        if self.tool_name:
+        if self.tool_name and not self._tool_emitted:
+            # 只发一次工具调用，否则 agent 循环会在“模型永远要求调工具”上空转。
             tool_calls = [{"id": "call_mock_1", "name": self.tool_name, "arguments": self.tool_arguments}]
+            self._tool_emitted = True
 
         content = self.content
         if content is None and not tool_calls:
